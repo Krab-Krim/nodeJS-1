@@ -1,6 +1,6 @@
 const yargs = require('yargs')
 const pkg = require('./package.json')
-const {addNote, printNotes, removeNote, remove} = require('./notes.controller')
+const {addNote, printNotes, removeNote, remove, edit} = require('./notes.controller')
 
 yargs.version(pkg.version)
 
@@ -39,6 +39,21 @@ yargs.command({
   },
   handler({ id }) {
     remove(id)
+  }
+})
+
+yargs.command({
+  command: "edit",
+  describe: "Edit note by id",
+  builder: {
+    id: {
+      type: 'string',
+      describe: 'edit element',
+      demandOption: true
+    }
+  },
+  handler({ id, title }) {
+    edit(id, title)
   }
 })
 
