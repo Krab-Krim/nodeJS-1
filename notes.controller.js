@@ -42,6 +42,21 @@ async function remove(id) {
   console.log(chalk.bgRedBright(`Remove element ${id}`))
 }
 
+async function edit(id, title) {
+  const notes = await getNotes();
+
+  const newNotes = notes.map(note => {
+    if(note.id === id) {
+      return {...note, title: title}
+    } else {
+      return note
+    }
+  })
+
+  await saveNotes(newNotes)
+  console.log(chalk.yellow(`Remove element ${newNotes}`))
+}
+
 module.exports = {
-  addNote, printNotes, remove
+  addNote, printNotes, remove, edit
 }
